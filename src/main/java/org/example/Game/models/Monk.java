@@ -2,18 +2,19 @@ package org.example.Game.models;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.Map;
+import java.util.List;
 
 public class Monk {
     private UUID id;
     private int x;
     private int y;
-    private char position;
+    private Map<Integer, List<CultivatedLand>> cultivatedLands;
 
-    public Monk(int x, int y, char position){
+    public Monk(int x, int y) {
         this.id = UUID.randomUUID();
         this.x = x;
         this.y = y;
-        this.position = position;
     }
 
 
@@ -41,25 +42,26 @@ public class Monk {
         this.y = y;
     }
 
-    public char getPosition() {
-        return position;
+    public Map<Integer, List<CultivatedLand>> getCultivatedLands() {
+        return cultivatedLands;
     }
 
-    public void setPosition(char position) {
-        this.position = position;
+    public void setCultivatedLands(Map<Integer, List<CultivatedLand>> cultivatedLands) {
+        this.cultivatedLands = cultivatedLands;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Monk)) return false;
         Monk monk = (Monk) o;
-        return x == monk.x && y == monk.y && position == monk.position && Objects.equals(id, monk.id);
+        return x == monk.x && y == monk.y && id.equals(monk.id) && cultivatedLands.equals(monk.cultivatedLands);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, x, y, position);
+        return Objects.hash(id, x, y, cultivatedLands);
     }
 
     @Override
@@ -68,7 +70,8 @@ public class Monk {
                 "id=" + id +
                 ", x=" + x +
                 ", y=" + y +
-                ", position=" + position +
+                ", cultivatedLands=" + cultivatedLands +
                 '}';
     }
 }
+

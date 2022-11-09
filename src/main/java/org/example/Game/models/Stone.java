@@ -7,15 +7,13 @@ public class Stone{
     private UUID id;
     private int rowPos;
     private int columnPos;
-    private int size;
 
-    private int turn;
+    private Turns turn;
 
-    public Stone(int rowPos, int columnPos,  int size, int turn) {
+    public Stone(int rowPos, int columnPos, Turns turn) {
         this.id = UUID.randomUUID();
         this.rowPos = rowPos;
         this.columnPos = columnPos;
-        this.size = size;
         this.turn = turn;
     }
 
@@ -43,19 +41,14 @@ public class Stone{
         this.columnPos = columnPos;
     }
 
-    public int getSize() {
-        return size;
-    }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
 
-    public int getTurn() {
+
+    public Turns getTurn() {
         return turn;
     }
 
-    public void setTurn(int turn) {
+    public void setTurn(Turns turn) {
         this.turn = turn;
     }
 
@@ -64,12 +57,12 @@ public class Stone{
         if (this == o) return true;
         if (!(o instanceof Stone)) return false;
         Stone stone = (Stone) o;
-        return rowPos == stone.rowPos && columnPos == stone.columnPos && size == stone.size && turn == stone.turn && Objects.equals(id, stone.id);
+        return rowPos == stone.rowPos && columnPos == stone.columnPos && id.equals(stone.id) && turn == stone.turn;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rowPos, columnPos, size, turn);
+        return Objects.hash(id, rowPos, columnPos,  turn);
     }
 
     @Override
@@ -78,7 +71,6 @@ public class Stone{
                 "id=" + id +
                 ", rowPos=" + rowPos +
                 ", columnPos=" + columnPos +
-                ", size=" + size +
                 ", turn=" + turn +
                 '}';
     }

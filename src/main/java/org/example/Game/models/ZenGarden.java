@@ -1,5 +1,6 @@
 package org.example.Game.models;
 
+import org.example.Game.MatrixShow;
 import org.example.Game.repositories.ZenGardenRepo;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ public class ZenGarden {
     private int width;
 
     private int height;
+    private MatrixShow matrixShow;
 
 
     public ZenGarden(BuilderZenGarden builderZenGarden){
@@ -23,6 +25,7 @@ public class ZenGarden {
         this.monk = builderZenGarden.monk;
         this.width = builderZenGarden.width;
         this.height = builderZenGarden.height;
+        this.matrixShow = new MatrixShow(this);
     }
 
     public ZenGarden() {
@@ -90,17 +93,41 @@ public class ZenGarden {
         this.monk = monk;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public MatrixShow getMatrixShow() {
+        return matrixShow;
+    }
+
+    public void setMatrixShow(MatrixShow matrixShow) {
+        this.matrixShow = matrixShow;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ZenGarden)) return false;
         ZenGarden zenGarden = (ZenGarden) o;
-        return width == zenGarden.width && height == zenGarden.height && Objects.equals(id, zenGarden.id) && Objects.equals(stones, zenGarden.stones) && Objects.equals(monk, zenGarden.monk);
+        return width == zenGarden.width && height == zenGarden.height && Objects.equals(id, zenGarden.id) && Objects.equals(stones, zenGarden.stones) && Objects.equals(monk, zenGarden.monk) && Objects.equals(matrixShow, zenGarden.matrixShow);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, stones, monk, width, height);
+        return Objects.hash(id, stones, monk, width, height, matrixShow);
     }
 
     @Override
@@ -111,6 +138,13 @@ public class ZenGarden {
                 ", monk=" + monk +
                 ", width=" + width +
                 ", height=" + height +
+
                 '}';
+    }
+
+    @Override
+    protected ZenGarden clone() {
+
+        return new BuilderZenGarden(this.stones).height(this.height).width(this.width).monk(this.monk).build();
     }
 }
