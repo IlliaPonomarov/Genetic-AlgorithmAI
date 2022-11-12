@@ -50,32 +50,33 @@ public class MatrixShow {
     public boolean moveRight(int row, int column) {
         int moveRight = column + 1;
 
-        return moveRight < this.column && !this.matrix[row][moveRight].equals(-1);
+        return moveRight < this.column && this.matrix[row][moveRight].equals(0);
     }
 
     public boolean moveLeft(int row, int column) {
-        int moveLeft = column - 1;
+        if (column < 0) column = 1;
 
-        return moveLeft  > 0 && !this.matrix[row][moveLeft].equals(-1);
+        return column > 0 && this.matrix[row][column - 1].equals(0);
     }
 
     public boolean moveTop(int row, int column) {
         int moveTop = row - 1;
 
-        return row > 0 && !this.matrix[moveTop][column].equals(-1);
+        return row > 0 && this.matrix[moveTop][column].equals(0);
     }
 
     public boolean moveBottom(int row, int column) {
         int moveBottom = row + 1;
 
-        return moveBottom < row && !this.matrix[moveBottom][column].equals(-1);
+        return moveBottom < this.row && this.matrix[moveBottom][column].equals(0);
     }
 
     public boolean border(int row, int column, Moves move) {
-       return move.equals(Moves.RIGHT) && column == this.column ||
-               move.equals(Moves.LEFT) && column == 0 ||
-               move.equals(Moves.BOTTOM) && row == this.row - 1 ||
-               move.equals(Moves.TOP)  && row == 0;
+       return (     move.equals(Moves.TOP) && row == this.row - 1 ||
+                     move.equals(Moves.BOTTOM) && row == 0  ||
+                     move.equals(Moves.LEFT) && column == this.column - 1 ||
+                     move.equals(Moves.RIGHT) && column == 0
+               );
     }
 
 

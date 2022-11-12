@@ -2,6 +2,9 @@ package org.example;
 
 import org.example.Game.models.ZenGarden;
 import org.example.Game.services.ZenGardenService;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Hello world!
@@ -18,6 +21,7 @@ public class Main
         // Init zen garden without the monk
         ZenGardenService zenGardenService = new ZenGardenService();
         ZenGarden zenGarden = zenGardenService.generateStartGarden();
+        Optional<Map<List<Integer>, Integer>> result;
         int height = zenGarden.getHeight();
         int width = zenGarden.getWidth();
         //int countOfStones = zenGarden.getStones().size();
@@ -29,15 +33,18 @@ public class Main
         int maxGenes = ( height + width + countOfStones ) / 2;
         int maxBorder = ( ( height + width ) * 2 ) - 5;
         Population firstPopulation = new Population(settings.getCountOfPopulation(), maxGenes, maxBorder,zenGarden);
+        zenGarden.getMatrixShow().printMatrix();
         firstPopulation.initPopulation();
 
 
 
         for (generation = 0; generation < settings.getGeneration(); generation++) {
 
+            result = firstPopulation.resolve();
 
-            if (solution){
+            if (result.isPresent()){
                 System.out.printf("Best Solution %d", generation);
+                // print best solution
 
                 break;
             }
