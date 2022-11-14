@@ -87,6 +87,7 @@ public class Population {
 
         this.populations = sortChromosomesByFitnessDesc();
         int totalFitness = 0;
+        Global.globalBetterFitness.add(getFitnessByIndex(0, this.populations).get());
 
         if (getChromosomesAndFitnessByIndex(0, this.populations).isEmpty())
             return Optional.empty();
@@ -210,6 +211,7 @@ public class Population {
         Map<List<Integer>, Integer>  updatedCurrentPopulation = new LinkedHashMap<>();
         List<List<Integer>> chromosomes = new ArrayList<>(this.populations.keySet());
         List<Integer> fitness = new ArrayList<>(this.populations.values());
+        Global.globalWorstFitness.add(fitness.get(fitness.size() - 1));
 
         IntStream.range(0, this.populations.size() / 2).forEach(i -> {
             int lastIndex = this.populations.size() - i - 1;
