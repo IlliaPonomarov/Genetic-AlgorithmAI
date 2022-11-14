@@ -69,6 +69,10 @@ public class ZenGarden {
 
     }
 
+    public int emptyCellInZenGarden() {
+        return this.height * this.width - this.stones.size();
+    }
+
     public UUID getId() {
         return id;
     }
@@ -143,7 +147,7 @@ public class ZenGarden {
     }
 
     @Override
-    protected ZenGarden clone() {
+    public ZenGarden clone() {
 
         return new BuilderZenGarden(this.stones).height(this.height).width(this.width).monk(this.monk).build();
     }
